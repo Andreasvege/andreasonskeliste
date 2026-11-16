@@ -216,14 +216,15 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ---------- Bekreftelse ---------- */
 @keyframes toastin {
-  from { opacity: 0; transform: translate(-50%, 12px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .toast {
-  position: fixed; left: 50%; bottom: 28px; z-index: 10; display: flex; align-items: center;
-  gap: 12px; max-width: calc(100% - 32px); padding: 16px 24px; border-radius: 16px;
+  position: fixed; left: 0; right: 0; bottom: 28px; z-index: 10; display: flex; align-items: center;
+  gap: 12px; width: fit-content; max-width: calc(100% - 32px); margin: 0 auto;
+  padding: 16px 24px; border-radius: 16px;
   background: var(--natt); color: #fff; font-size: 17px; line-height: 1.4;
-  box-shadow: 0 12px 32px rgba(19, 41, 75, 0.35); transform: translateX(-50%);
+  box-shadow: 0 12px 32px rgba(19, 41, 75, 0.35);
   animation: toastin 0.25s ease-out;
 }
 

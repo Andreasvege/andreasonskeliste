@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
-import { CategoryView } from "@/components/WishViews";
-import { getToday } from "@/lib/today";
+import { GuestPage } from "@/components/GuestPage";
 import { findCategory, wishList } from "@/lib/wishes";
 
 export function generateStaticParams() {
@@ -8,8 +7,7 @@ export function generateStaticParams() {
 }
 
 export default async function Page({ params }: PageProps<"/k/[slug]">) {
-  const category = findCategory((await params).slug);
-  if (!category) notFound();
-  const today = await getToday();
-  return <CategoryView list={wishList} category={category} mode="guest" counts={null} today={today} />;
+  const { slug } = await params;
+  if (!findCategory(slug)) notFound();
+  return <GuestPage page={{ kind: "category", slug }} />;
 }
