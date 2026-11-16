@@ -1,26 +1,234 @@
-@import "tailwindcss";
-
+/* ---------- Tokens ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --natt: #13294b;
+  --sno: #f6f9fc;
+  --rod: #a3211a;
+  --rod-hover: #7a1812;
+  --dempet: #4f6079;
+  --strek: #5e6e82;
+  --linje: #d5dfea;
+  --ikon: #e4edf6;
+  --gul: #ffc53d;
+  --gronn: #1f7a45;
+  --hero-lys: #cfe3f5;
+  --blekk: #34496b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background: var(--sno);
+  color: var(--natt);
+  font-family: var(--font-bricolage), system-ui, sans-serif;
+}
+a { color: var(--rod); }
+a:hover { color: var(--rod-hover); }
+button { font-family: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--rod); outline-offset: 3px; }
+
+.hand { font-family: var(--font-caveat), cursive; }
+.sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; background: var(--natt); color: #fff; }
+.lights { position: relative; z-index: 1; height: 52px; }
+.lights svg { position: absolute; top: 0; left: 0; display: block; }
+.hero-inner { position: relative; max-width: 1040px; margin: 0 auto; padding: 32px 24px 48px; }
+.hero-occasion { margin: 0 0 56px; font-size: 30px; font-weight: 700; color: var(--hero-lys); }
+.hero h1 {
+  margin: 0; font-size: clamp(48px, 8vw, 96px); line-height: 0.92;
+  font-weight: 800; letter-spacing: -0.035em;
+}
+.hero-sub {
+  margin: 14px 0 0; font-size: clamp(26px, 3vw, 34px); font-weight: 500;
+  color: var(--hero-lys); transform: rotate(-2deg); transform-origin: left;
+}
+
+@keyframes snowfall {
+  from { transform: translate3d(0, -40px, 0); }
+  to { transform: translate3d(24px, 520px, 0); }
+}
+.flake {
+  position: absolute; top: 0; border-radius: 50%; background: #fff; opacity: 0.85;
+  animation-name: snowfall; animation-timing-function: linear; animation-iteration-count: infinite;
+}
+.drift {
+  height: 44px;
+  background: radial-gradient(circle at 36px 52px, var(--sno) 40px, transparent 41px) 0 0 / 72px 44px repeat-x;
+}
+@keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.bulb {
+  position: absolute; top: 19px; width: 12px; height: 18px; margin-left: -6px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+.bulb::before {
+  content: ""; position: absolute; top: -5px; left: 3px; width: 6px; height: 6px;
+  border-radius: 2px; background: #2b3a55;
+}
+
+/* ---------- Strikkemønster ---------- */
+.knit { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+.knit-dots {
+  height: 10px;
+  background: radial-gradient(circle, var(--natt) 2.5px, transparent 3px) 0 0 / 14px 10px repeat-x;
+}
+.knit-zig {
+  height: 22px;
+  background:
+    linear-gradient(135deg, var(--rod) 25%, transparent 25%) -11px 0 / 22px 22px,
+    linear-gradient(225deg, var(--rod) 25%, transparent 25%) -11px 0 / 22px 22px,
+    linear-gradient(315deg, var(--rod) 25%, transparent 25%) 0 0 / 22px 22px,
+    linear-gradient(45deg, var(--rod) 25%, transparent 25%) 0 0 / 22px 22px;
+}
+
+/* ---------- Layout ---------- */
+.main { max-width: 1040px; margin: 0 auto; padding: 24px 24px 112px; }
+.owner-banner {
+  margin: 0 0 24px; padding: 14px 0; border-bottom: 2px solid var(--natt);
+  font-size: 17px; font-weight: 600;
+}
+.overview-top {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+  gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--linje);
+}
+.summary { margin: 0; font-size: 18px; color: var(--dempet); }
+.sizes { margin: 64px 0 0; font-size: 28px; font-weight: 500; color: var(--blekk); }
+.sizes-all { margin-top: 32px; }
+
+/* Pilleknapper/lenker */
+.pill-outline {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 24px;
+  border: 2px solid var(--natt); border-radius: 999px; background: transparent;
+  color: var(--natt); font-size: 17px; font-weight: 600; text-decoration: none;
+}
+.pill-outline:hover { color: var(--natt); background: rgba(19, 41, 75, 0.06); }
+.pill-next { min-height: 56px; margin-top: 48px; padding: 0 28px; font-size: 18px; }
+
+.back {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  color: var(--rod); font-size: 17px; font-weight: 600; text-decoration: none;
+}
+.plain-link {
+  display: inline-flex; align-items: center; min-height: 44px; color: var(--natt);
+  font-size: 17px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px;
+}
+.plain-link:hover { color: var(--rod); }
+.cat-nav {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+  gap: 12px 24px; margin-bottom: 32px;
+}
+
+/* Kategori-rader på forsiden */
+.catrow {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; width: 100%;
+  min-height: 112px; padding: 20px 0; border-bottom: 1px solid var(--linje);
+  color: var(--natt); text-decoration: none;
+}
+.catrow:hover { color: var(--natt); }
+.catrow:hover .catname { color: var(--rod); }
+.caticon {
+  display: flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%; background: var(--ikon);
+}
+.cattext { flex: 999 1 300px; min-width: 0; }
+.catname {
+  display: block; font-size: clamp(30px, 4vw, 44px); font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1.05;
+}
+.catmeta { display: block; margin-top: 4px; font-size: 17px; color: var(--dempet); }
+
+/* Overskrifter */
+.h-page {
+  margin: 0 0 6px; font-size: clamp(40px, 6vw, 64px); font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1;
+}
+.page-meta { margin: 0 0 24px; font-size: 18px; color: var(--dempet); }
+.page-meta-all { margin-bottom: 56px; }
+.group { margin-bottom: 72px; }
+.group .knit { margin-bottom: 20px; }
+.h-group { margin: 0 0 4px; font-size: 30px; font-weight: 800; letter-spacing: -0.01em; }
+
+/* ---------- Ønske-rad ---------- */
+.item {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px;
+  padding: 20px 0; border-bottom: 1px solid var(--linje);
+}
+.item-body { flex: 999 1 380px; min-width: 0; }
+.item-star {
+  display: flex; align-items: center; gap: 6px; margin: 0 0 6px; font-size: 13px;
+  font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rod);
+}
+.item-name { margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; }
+.item-name.strike { color: var(--strek); text-decoration: line-through; }
+.item-note { margin: 4px 0 0; font-size: 16px; color: var(--dempet); }
+.item-hand {
+  margin: 6px 0 0; font-size: 25px; font-weight: 700; color: var(--rod);
+  transform: rotate(-1.5deg); transform-origin: left;
+}
+.item-multi {
+  display: flex; align-items: center; gap: 8px; margin: 8px 0 0;
+  font-size: 15px; font-weight: 600; color: var(--blekk);
+}
+.item-shop { display: flex; flex-wrap: wrap; align-items: center; gap: 0 16px; margin-top: 6px; }
+.sale {
+  display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-height: 44px;
+  font-size: 16px; font-weight: 600; color: var(--natt);
+}
+.sale-badge {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px;
+  background: var(--gul); color: var(--natt); font-size: 13px; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.sale-was { font-weight: 400; color: var(--dempet); text-decoration: line-through; }
+.sale-until { font-weight: 400; color: var(--dempet); }
+.shop-link {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 16px;
+  font-weight: 600; text-decoration: underline; text-underline-offset: 4px;
+}
+
+/* Handlingsknapper */
+.btn-take {
+  min-height: 48px; padding: 0 24px; border: none; border-radius: 999px;
+  background: var(--rod); color: #fff; font-size: 16px; font-weight: 600;
+}
+.btn-take:hover { background: var(--rod-hover); }
+.btn-mine {
+  display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px;
+  border: 2px solid var(--gronn); border-radius: 999px; background: #fff;
+  color: var(--gronn); font-size: 16px; font-weight: 600;
+}
+.taken {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px;
+  border: 1.5px dashed #8fa3bb; border-radius: 999px; color: var(--dempet);
+  font-size: 16px; font-weight: 600;
+}
+.btn-take:disabled, .btn-mine:disabled { cursor: progress; opacity: 0.6; }
+.btn-placeholder {
+  display: inline-block; width: 150px; min-height: 48px; border-radius: 999px;
+  background: var(--ikon);
+}
+
+/* ---------- Bekreftelse ---------- */
+@keyframes toastin {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+.toast {
+  position: fixed; left: 50%; bottom: 28px; z-index: 10; display: flex; align-items: center;
+  gap: 12px; max-width: calc(100% - 32px); padding: 16px 24px; border-radius: 16px;
+  background: var(--natt); color: #fff; font-size: 17px; line-height: 1.4;
+  box-shadow: 0 12px 32px rgba(19, 41, 75, 0.35); transform: translateX(-50%);
+  animation: toastin 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flake { animation: none; top: 40%; }
+  .bulb { animation: none; }
+  .toast { animation: none; }
 }

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Ønskeliste – delingsbilde</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&amp;family=Caveat:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.ogbulb{position:absolute;top:30px;width:18px;height:27px;margin-left:-9px;border-radius:50% 50% 50% 50%/40% 40% 60% 60%}
+.ogbulb::before{content:"";position:absolute;top:-7px;left:4px;width:10px;height:9px;border-radius:2px;background:#2B3A55}
+.knit-dots{height:12px;background:radial-gradient(circle,#13294B 3px,transparent 3.5px) 0 0/18px 12px repeat-x}
+.knit-zig{height:28px;background:linear-gradient(135deg,#A3211A 25%,transparent 25%) -14px 0/28px 28px,linear-gradient(225deg,#A3211A 25%,transparent 25%) -14px 0/28px 28px,linear-gradient(315deg,#A3211A 25%,transparent 25%) 0 0/28px 28px,linear-gradient(45deg,#A3211A 25%,transparent 25%) 0 0/28px 28px}
+</style>
+</helmet>
+<div style="position: relative; overflow: hidden; width: 1200px; height: 630px; box-sizing: border-box; background: #13294B; color: #FFFFFF; font-family: 'Bricolage Grotesque', system-ui, sans-serif">
+<div aria-hidden="true">
+<svg width="1200" height="70" viewBox="0 0 1200 70" style="position: absolute; top: 0; left: 0; display: block"><path d="M0 6 Q60 50 120 6 Q180 50 240 6 Q300 50 360 6 Q420 50 480 6 Q540 50 600 6 Q660 50 720 6 Q780 50 840 6 Q900 50 960 6 Q1020 50 1080 6 Q1140 50 1200 6" fill="none" stroke="#4A6587" stroke-width="3"></path></svg>
+<span class="ogbulb" style="left: 60px; background: #FF5A5F; box-shadow: 0 0 22px 6px rgba(255, 90, 95, 0.65)"></span>
+<span class="ogbulb" style="left: 180px; background: #FFC53D; box-shadow: 0 0 22px 6px rgba(255, 197, 61, 0.65)"></span>
+<span class="ogbulb" style="left: 300px; background: #5BD27A; box-shadow: 0 0 22px 6px rgba(91, 210, 122, 0.65)"></span>
+<span class="ogbulb" style="left: 420px; background: #6CC4FF; box-shadow: 0 0 22px 6px rgba(108, 196, 255, 0.65)"></span>
+<span class="ogbulb" style="left: 540px; background: #FF5A5F; box-shadow: 0 0 22px 6px rgba(255, 90, 95, 0.65)"></span>
+<span class="ogbulb" style="left: 660px; background: #FFC53D; box-shadow: 0 0 22px 6px rgba(255, 197, 61, 0.65)"></span>
+<span class="ogbulb" style="left: 780px; background: #5BD27A; box-shadow: 0 0 22px 6px rgba(91, 210, 122, 0.65)"></span>
+<span class="ogbulb" style="left: 900px; background: #6CC4FF; box-shadow: 0 0 22px 6px rgba(108, 196, 255, 0.65)"></span>
+<span class="ogbulb" style="left: 1020px; background: #FF5A5F; box-shadow: 0 0 22px 6px rgba(255, 90, 95, 0.65)"></span>
+<span class="ogbulb" style="left: 1140px; background: #FFC53D; box-shadow: 0 0 22px 6px rgba(255, 197, 61, 0.65)"></span>
+<span style="position: absolute; left: 140px; top: 210px; width: 6px; height: 6px; border-radius: 50%; background: #FFFFFF; opacity: 0.8"></span>
+<span style="position: absolute; left: 980px; top: 160px; width: 8px; height: 8px; border-radius: 50%; background: #FFFFFF; opacity: 0.8"></span>
+<span style="position: absolute; left: 1080px; top: 330px; width: 5px; height: 5px; border-radius: 50%; background: #FFFFFF; opacity: 0.8"></span>
+<span style="position: absolute; left: 860px; top: 420px; width: 6px; height: 6px; border-radius: 50%; background: #FFFFFF; opacity: 0.8"></span>
+<span style="position: absolute; left: 1140px; top: 220px; width: 4px; height: 4px; border-radius: 50%; background: #FFFFFF; opacity: 0.8"></span>
+<span style="position: absolute; left: 700px; top: 140px; width: 5px; height: 5px; border-radius: 50%; background: #FFFFFF; opacity: 0.8"></span>
+</div>
+<div style="position: absolute; left: 80px; right: 80px; top: 140px">
+<p style="margin: 0 0 18px; font-family: 'Caveat', cursive; font-size: 46px; font-weight: 700; color: #CFE3F5">bursdag 2. desember &amp; jul</p>
+<h1 style="margin: 0; font-size: 128px; line-height: 0.9; font-weight: 800; letter-spacing: -0.04em">Andreas ønsker seg</h1>
+<p style="margin: 26px 0 0; font-size: 30px; font-weight: 600; color: #DCE8F4">Se lista og reserver anonymt</p>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 8px; padding: 18px 0 22px; background: #F6F9FC">
+<div class="knit-dots"></div>
+<div class="knit-zig"></div>
+<div class="knit-dots"></div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1200,"height":630}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Ønskeliste – kategorier</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&amp;family=Caveat:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F6F9FC}
+a{color:#A3211A}a:hover{color:#7A1812}
+button{font-family:inherit;cursor:pointer}
+@keyframes snowfall{from{transform:translate3d(0,-40px,0)}to{transform:translate3d(24px,520px,0)}}
+.flake{position:absolute;top:0;border-radius:50%;background:#FFFFFF;opacity:.85;animation-name:snowfall;animation-timing-function:linear;animation-iteration-count:infinite}
+.drift{height:44px;background:radial-gradient(circle at 36px 52px,#F6F9FC 40px,transparent 41px) 0 0/72px 44px repeat-x}
+.knit-dots{height:10px;background:radial-gradient(circle,#13294B 2.5px,transparent 3px) 0 0/14px 10px repeat-x}
+.knit-zig{height:22px;background:linear-gradient(135deg,#A3211A 25%,transparent 25%) -11px 0/22px 22px,linear-gradient(225deg,#A3211A 25%,transparent 25%) -11px 0/22px 22px,linear-gradient(315deg,#A3211A 25%,transparent 25%) 0 0/22px 22px,linear-gradient(45deg,#A3211A 25%,transparent 25%) 0 0/22px 22px}
+.catrow:hover .catname{color:#A3211A}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.35}}
+.bulb{position:absolute;top:19px;width:12px;height:18px;margin-left:-6px;border-radius:50% 50% 50% 50%/40% 40% 60% 60%;animation:twinkle 2.4s ease-in-out infinite}
+.bulb::before{content:"";position:absolute;top:-5px;left:3px;width:6px;height:6px;border-radius:2px;background:#2B3A55}
+@keyframes toastin{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion: reduce){.flake{animation:none;top:40%}.bulb{animation:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F6F9FC; color: #13294B; font-family: 'Bricolage Grotesque', system-ui, sans-serif">
+<header style="position: relative; overflow: hidden; background: #13294B; color: #FFFFFF">
+<div aria-hidden="true" style="position: relative; z-index: 1; height: 52px">
+<svg width="100%" height="44" viewBox="0 0 1400 44" preserveAspectRatio="none" style="position: absolute; top: 0; left: 0; display: block"><path d="M0 4 Q50 30 100 4 Q150 30 200 4 Q250 30 300 4 Q350 30 400 4 Q450 30 500 4 Q550 30 600 4 Q650 30 700 4 Q750 30 800 4 Q850 30 900 4 Q950 30 1000 4 Q1050 30 1100 4 Q1150 30 1200 4 Q1250 30 1300 4 Q1350 30 1400 4" fill="none" stroke="#4A6587" stroke-width="2"></path></svg>
+<span class="bulb" style="left: 3.571%; background: #FF5A5F; box-shadow: 0 0 14px 3px rgba(255, 90, 95, 0.7); animation-delay: 0s"></span>
+<span class="bulb" style="left: 10.714%; background: #FFC53D; box-shadow: 0 0 14px 3px rgba(255, 197, 61, 0.7); animation-delay: -0.6s"></span>
+<span class="bulb" style="left: 17.857%; background: #5BD27A; box-shadow: 0 0 14px 3px rgba(91, 210, 122, 0.7); animation-delay: -1.2s"></span>
+<span class="bulb" style="left: 25%; background: #6CC4FF; box-shadow: 0 0 14px 3px rgba(108, 196, 255, 0.7); animation-delay: -1.8s"></span>
+<span class="bulb" style="left: 32.143%; background: #FF5A5F; box-shadow: 0 0 14px 3px rgba(255, 90, 95, 0.7); animation-delay: -0.3s"></span>
+<span class="bulb" style="left: 39.286%; background: #FFC53D; box-shadow: 0 0 14px 3px rgba(255, 197, 61, 0.7); animation-delay: -0.9s"></span>
+<span class="bulb" style="left: 46.429%; background: #5BD27A; box-shadow: 0 0 14px 3px rgba(91, 210, 122, 0.7); animation-delay: -1.5s"></span>
+<span class="bulb" style="left: 53.571%; background: #6CC4FF; box-shadow: 0 0 14px 3px rgba(108, 196, 255, 0.7); animation-delay: -2.1s"></span>
+<span class="bulb" style="left: 60.714%; background: #FF5A5F; box-shadow: 0 0 14px 3px rgba(255, 90, 95, 0.7); animation-delay: -0.45s"></span>
+<span class="bulb" style="left: 67.857%; background: #FFC53D; box-shadow: 0 0 14px 3px rgba(255, 197, 61, 0.7); animation-delay: -1.05s"></span>
+<span class="bulb" style="left: 75%; background: #5BD27A; box-shadow: 0 0 14px 3px rgba(91, 210, 122, 0.7); animation-delay: -1.65s"></span>
+<span class="bulb" style="left: 82.143%; background: #6CC4FF; box-shadow: 0 0 14px 3px rgba(108, 196, 255, 0.7); animation-delay: -0.15s"></span>
+<span class="bulb" style="left: 89.286%; background: #FF5A5F; box-shadow: 0 0 14px 3px rgba(255, 90, 95, 0.7); animation-delay: -0.75s"></span>
+<span class="bulb" style="left: 96.429%; background: #FFC53D; box-shadow: 0 0 14px 3px rgba(255, 197, 61, 0.7); animation-delay: -1.35s"></span>
+</div>
+<div aria-hidden="true">
+<span class="flake" style="left: 6%; width: 5px; height: 5px; animation-duration: 10s; animation-delay: -3s"></span>
+<span class="flake" style="left: 16%; width: 3px; height: 3px; animation-duration: 8s; animation-delay: -6s"></span>
+<span class="flake" style="left: 26%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: -1s"></span>
+<span class="flake" style="left: 36%; width: 4px; height: 4px; animation-duration: 9s; animation-delay: -7s"></span>
+<span class="flake" style="left: 48%; width: 5px; height: 5px; animation-duration: 11s; animation-delay: -9s"></span>
+<span class="flake" style="left: 58%; width: 3px; height: 3px; animation-duration: 8s; animation-delay: -4s"></span>
+<span class="flake" style="left: 68%; width: 6px; height: 6px; animation-duration: 13s; animation-delay: -2s"></span>
+<span class="flake" style="left: 78%; width: 4px; height: 4px; animation-duration: 9s; animation-delay: -5s"></span>
+<span class="flake" style="left: 88%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: -8s"></span>
+<span class="flake" style="left: 95%; width: 3px; height: 3px; animation-duration: 10s; animation-delay: -1s"></span>
+</div>
+<div style="position: relative; max-width: 1040px; margin: 0 auto; padding: 32px 24px 48px; box-sizing: border-box">
+<p style="margin: 0 0 56px; font-family: 'Caveat', cursive; font-size: 30px; font-weight: 700; color: #CFE3F5">bursdag 2. desember &amp; jul</p>
+<h1 style="margin: 0; font-size: clamp(48px, 8vw, 96px); line-height: 0.92; font-weight: 800; letter-spacing: -0.035em">Andreas ønsker seg</h1>
+<p style="margin: 14px 0 0; font-family: 'Caveat', cursive; font-size: clamp(26px, 3vw, 34px); font-weight: 500; color: #CFE3F5; transform: rotate(-2deg); transform-origin: left">mest varme ting, litt kaffe og et par dingser</p>
+</div>
+<div class="drift" aria-hidden="true"></div>
+</header>
+<main style="max-width: 1040px; margin: 0 auto; padding: 24px 24px 112px; box-sizing: border-box">
+<sc-if value="{{isOwner}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0 0 24px; padding: 14px 0; border-bottom: 2px solid #13294B; font-size: 17px; font-weight: 600">Spoilerfri visning (/andreas). Du ser hele lista, men ikke hva som er tatt.</p>
+</sc-if>
+<sc-if value="{{isOverview}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid #D5DFEA">
+<p style="margin: 0; font-size: 18px; color: #4F6079">{{summary}}</p>
+<button type="button" onClick="{{showAll}}" style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 24px; border: 2px solid #13294B; border-radius: 999px; background: transparent; color: #13294B; font-size: 17px; font-weight: 600">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path></svg>
+Hele lista</button>
+</div>
+<nav aria-label="Kategorier">
+<sc-for list="{{cats}}" as="cat" hint-placeholder-count="5">
+<button type="button" class="catrow" onClick="{{cat.open}}" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; width: 100%; min-height: 112px; padding: 20px 0; border: none; border-bottom: 1px solid #D5DFEA; background: transparent; color: #13294B; text-align: left">
+<span aria-hidden="true" style="display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: #E4EDF6">
+<sc-if value="{{cat.isRun}}" hint-placeholder-val="{{ false }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17h14l5 2v2H2z"></path><path d="M4 17l2-9 4 2 2 4 4 1"></path></svg></sc-if>
+<sc-if value="{{cat.isKitchen}}" hint-placeholder-val="{{ false }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"></path><path d="M16 10h2a3 3 0 0 1 0 6h-2"></path><path d="M8 3v2M12 3v2"></path></svg></sc-if>
+<sc-if value="{{cat.isTech}}" hint-placeholder-val="{{ false }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="5"></rect><path d="M12 7v4"></path></svg></sc-if>
+<sc-if value="{{cat.isMusic}}" hint-placeholder-val="{{ false }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle></svg></sc-if>
+<sc-if value="{{cat.isTravel}}" hint-placeholder-val="{{ false }}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="13" rx="2"></rect><path d="M9 7V4h6v3M9 20v1M15 20v1"></path></svg></sc-if>
+</span>
+<span style="flex: 999 1 300px; min-width: 0">
+<span class="catname" style="display: block; font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05">{{cat.name}}</span>
+<span style="display: block; margin-top: 4px; font-size: 17px; color: #4F6079">{{cat.meta}}</span>
+</span>
+<svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#A3211A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</button>
+</sc-for>
+</nav>
+<p style="margin: 64px 0 0; font-family: 'Caveat', cursive; font-size: 28px; font-weight: 500; color: #34496B">Størrelser: overdel [fyll inn] · tights [fyll inn] · sko [fyll inn]</p>
+</sc-if>
+<sc-if value="{{isCategory}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; margin-bottom: 32px">
+<button type="button" onClick="{{back}}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0; border: none; background: transparent; color: #A3211A; font-size: 17px; font-weight: 600">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3211A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+Alle kategorier</button>
+<button type="button" onClick="{{showAll}}" style="min-height: 44px; padding: 0; border: none; background: transparent; color: #13294B; font-size: 17px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px">Hele lista</button>
+</div>
+<div aria-hidden="true" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px">
+<div class="knit-dots"></div>
+<div class="knit-zig"></div>
+<div class="knit-dots"></div>
+</div>
+<h2 style="margin: 0 0 6px; font-size: clamp(40px, 6vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 1">{{current.name}}</h2>
+<p style="margin: 0 0 24px; font-size: 18px; color: #4F6079">{{current.meta}}</p>
+<sc-for list="{{current.items}}" as="item" hint-placeholder-count="4">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 20px 0; border-bottom: 1px solid #D5DFEA">
+<div style="flex: 999 1 380px; min-width: 0">
+<sc-if value="{{item.star}}" hint-placeholder-val="{{ false }}">
+<p style="display: flex; align-items: center; gap: 6px; margin: 0 0 6px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #A3211A"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="#FFC53D" stroke="#A3211A" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"></path></svg>Mest ønsket</p>
+</sc-if>
+<sc-if value="{{item.strike}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; color: #5E6E82; text-decoration: line-through">{{item.name}}</p>
+</sc-if>
+<sc-if value="{{item.plain}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2">{{item.name}}</p>
+</sc-if>
+<p style="margin: 4px 0 0; font-size: 16px; color: #4F6079">{{item.note}}</p>
+<sc-if value="{{item.hasHand}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 6px 0 0; font-family: 'Caveat', cursive; font-size: 25px; font-weight: 700; color: #A3211A; transform: rotate(-1.5deg); transform-origin: left">{{item.hand}}</p>
+</sc-if>
+<sc-if value="{{item.isMulti}}" hint-placeholder-val="{{ false }}">
+<p style="display: flex; align-items: center; gap: 8px; margin: 8px 0 0; font-size: 15px; font-weight: 600; color: #34496B"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34496B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 .3 6 2.3 6 5.5"></path></svg>{{item.multiText}}</p>
+</sc-if>
+<sc-if value="{{item.hasShop}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0 16px; margin-top: 6px">
+<sc-if value="{{item.onSale}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-height: 44px; font-size: 16px; font-weight: 600; color: #13294B">
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: #FFC53D; color: #13294B; font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"></path><path d="M7.5 7.5h.01"></path></svg>Tilbud</span>
+<span>{{item.salePrice}}</span>
+<span style="font-weight: 400; color: #4F6079; text-decoration: line-through">{{item.saleWas}}</span>
+<span style="font-weight: 400; color: #4F6079">til {{item.saleUntil}}</span>
+</span>
+</sc-if>
+<sc-for list="{{item.links}}" as="link" hint-placeholder-count="1">
+<a href="{{link.url}}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 16px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px">{{link.label}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg><span class="sr">(åpnes i ny fane)</span></a>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{item.canTake}}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{item.toggle}}" style="min-height: 48px; padding: 0 24px; border: none; border-radius: 999px; background: #A3211A; color: #FFFFFF; font-size: 16px; font-weight: 600">{{item.takeLabel}}</button>
+</sc-if>
+<sc-if value="{{item.isMine}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{item.toggle}}" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 2px solid #1F7A45; border-radius: 999px; background: #FFFFFF; color: #1F7A45; font-size: 16px; font-weight: 600"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F7A45" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"></path></svg>{{item.mineLabel}} · angre</button>
+</sc-if>
+<sc-if value="{{item.takenByOther}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border: 1.5px dashed #8FA3BB; border-radius: 999px; color: #4F6079; font-size: 16px; font-weight: 600">Tatt av noen</span>
+</sc-if>
+</div>
+</sc-for>
+<button type="button" onClick="{{next}}" style="display: flex; align-items: center; gap: 10px; min-height: 56px; margin-top: 48px; padding: 0 28px; border: 2px solid #13294B; border-radius: 999px; background: transparent; color: #13294B; font-size: 18px; font-weight: 600">
+Neste: {{nextName}}
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</button>
+</sc-if>
+<sc-if value="{{isAll}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{back}}" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0; border: none; background: transparent; color: #A3211A; font-size: 17px; font-weight: 600; margin-bottom: 24px">
+<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A3211A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+Alle kategorier</button>
+<h2 style="margin: 0 0 6px; font-size: clamp(40px, 6vw, 64px); font-weight: 800; letter-spacing: -0.03em; line-height: 1">Hele lista</h2>
+<p style="margin: 0 0 56px; font-size: 18px; color: #4F6079">{{summary}}</p>
+<sc-for list="{{allGroups}}" as="group" hint-placeholder-count="5">
+<section style="margin-bottom: 72px">
+<div aria-hidden="true" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px">
+<div class="knit-dots"></div>
+<div class="knit-zig"></div>
+<div class="knit-dots"></div>
+</div>
+<h3 style="margin: 0 0 4px; font-size: 30px; font-weight: 800; letter-spacing: -0.01em">{{group.name}}</h3>
+<sc-for list="{{group.items}}" as="item" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 20px 0; border-bottom: 1px solid #D5DFEA">
+<div style="flex: 999 1 380px; min-width: 0">
+<sc-if value="{{item.star}}" hint-placeholder-val="{{ false }}">
+<p style="display: flex; align-items: center; gap: 6px; margin: 0 0 6px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #A3211A"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="#FFC53D" stroke="#A3211A" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"></path></svg>Mest ønsket</p>
+</sc-if>
+<sc-if value="{{item.strike}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; color: #5E6E82; text-decoration: line-through">{{item.name}}</p>
+</sc-if>
+<sc-if value="{{item.plain}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2">{{item.name}}</p>
+</sc-if>
+<p style="margin: 4px 0 0; font-size: 16px; color: #4F6079">{{item.note}}</p>
+<sc-if value="{{item.hasHand}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 6px 0 0; font-family: 'Caveat', cursive; font-size: 25px; font-weight: 700; color: #A3211A; transform: rotate(-1.5deg); transform-origin: left">{{item.hand}}</p>
+</sc-if>
+<sc-if value="{{item.isMulti}}" hint-placeholder-val="{{ false }}">
+<p style="display: flex; align-items: center; gap: 8px; margin: 8px 0 0; font-size: 15px; font-weight: 600; color: #34496B"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34496B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 .3 6 2.3 6 5.5"></path></svg>{{item.multiText}}</p>
+</sc-if>
+<sc-if value="{{item.hasShop}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0 16px; margin-top: 6px">
+<sc-if value="{{item.onSale}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-height: 44px; font-size: 16px; font-weight: 600; color: #13294B">
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: #FFC53D; color: #13294B; font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#13294B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"></path><path d="M7.5 7.5h.01"></path></svg>Tilbud</span>
+<span>{{item.salePrice}}</span>
+<span style="font-weight: 400; color: #4F6079; text-decoration: line-through">{{item.saleWas}}</span>
+<span style="font-weight: 400; color: #4F6079">til {{item.saleUntil}}</span>
+</span>
+</sc-if>
+<sc-for list="{{item.links}}" as="link" hint-placeholder-count="1">
+<a href="{{link.url}}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 16px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px">{{link.label}}<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg><span class="sr">(åpnes i ny fane)</span></a>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{item.canTake}}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{item.toggle}}" style="min-height: 48px; padding: 0 24px; border: none; border-radius: 999px; background: #A3211A; color: #FFFFFF; font-size: 16px; font-weight: 600">{{item.takeLabel}}</button>
+</sc-if>
+<sc-if value="{{item.isMine}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{item.toggle}}" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 2px solid #1F7A45; border-radius: 999px; background: #FFFFFF; color: #1F7A45; font-size: 16px; font-weight: 600"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F7A45" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"></path></svg>{{item.mineLabel}} · angre</button>
+</sc-if>
+<sc-if value="{{item.takenByOther}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border: 1.5px dashed #8FA3BB; border-radius: 999px; color: #4F6079; font-size: 16px; font-weight: 600">Tatt av noen</span>
+</sc-if>
+</div>
+</sc-for>
+</section>
+</sc-for>
+<p style="margin: 32px 0 0; font-family: 'Caveat', cursive; font-size: 28px; font-weight: 500; color: #34496B">Størrelser: overdel [fyll inn] · tights [fyll inn] · sko [fyll inn]</p>
+</sc-if>
+</main>
+<sc-if value="{{showToast}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="position: fixed; left: 50%; bottom: 28px; z-index: 10; display: flex; align-items: center; gap: 12px; max-width: calc(100% - 32px); box-sizing: border-box; padding: 16px 24px; border-radius: 16px; background: #13294B; color: #FFFFFF; font-size: 17px; line-height: 1.4; box-shadow: 0 12px 32px rgba(19, 41, 75, 0.35); transform: translateX(-50%); animation: toastin 0.25s ease-out">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5BD27A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M4 12.5l5 5L20 6.5"></path></svg>
+<span><strong>Supert!</strong> Ingen navn er lagret. Du kan angre fra denne nettleseren.</span>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"view":{"editor":"enum","options":["Gjest","Andreas (/andreas)"],"default":"Gjest"},"$preview":{"width":1280,"height":1400}}'>
+var GROUPS = [
+  { key: "run", name: "Løping om vinteren", items: [
+    { id: "tights", name: "Vindtette løpetights", note: "Craft ADV SubZ Tights", hand: "til de kaldeste turene" },
+    { id: "jakke", name: "Lett vindjakke", note: "Craft, Swix eller Norrøna senja" },
+    { id: "ull", name: "Tynt ullundertøy", note: "Aclima LightWool, Devold eller Ulvang", hand: "gjerne litt sporty" },
+    { id: "sokker", name: "Løpesokker i ull", note: "Smartwool Run eller Darn Tough", multi: true },
+    { id: "buff", name: "Buff Merino", note: "Til halsen" },
+    { id: "votter", name: "Tynne løpevotter", note: "Craft eller Swix" },
+    { id: "lue", name: "Tynn lue", note: "Ull eller fleece" }
+  ]},
+  { key: "kitchen", name: "Kjøkken og kaffe", items: [
+    { id: "kapsler", name: "Vertuo Double Espresso Dolce", note: "Må være Nespresso Vertuo-kapsler", hand: "mild og dobbel, takk", multi: true },
+    { id: "pizza", name: "Pizzastål", note: "Ca. 6 mm tykt" },
+    { id: "fjol", name: "Skjærefjøl som tåler oppvaskmaskin", note: "Epicurean" },
+    { id: "panne", name: "Stekepanne i rustfritt stål, 24 cm", note: "F.eks. Scanpan Impact", hand: "trenger ikke være fancy" }
+  ]},
+  { key: "tech", name: "Tech", items: [
+    { id: "matte", name: "Musematte XXL", note: "Svive Flow Performance, sort", star: true, links: [
+      { label: "Se hos Komplett", url: "https://www.komplett.no/product/1323384/gaming/gaming-utstyr/gamingmusematte/svive-flow-gaming-musematte-performance-xxl-sort" }
+    ] },
+    { id: "airtag", name: "AirTag", note: "Gjerne 4-pakning", hand: "helst på salg!",
+      links: [{ label: "Se hos Komplett", url: "https://www.komplett.no" }],
+      sale: { price: "xxx kr", was: "yyy kr", until: "2026-11-30" } }
+  ]},
+  { key: "music", name: "Musikk", items: [
+    { id: "strenger", name: "Gitarstrenger, akustisk", note: "D'Addario EJ16, 12-53", hand: "helt vanlige stålstrenger", multi: true },
+    { id: "heng", name: "Gitarheng til vegg", note: "Hercules eller String Swing" },
+    { id: "munnspill", name: "Munnspill i C-dur", note: "Hohner Special 20" }
+  ]},
+  { key: "travel", name: "Reise", items: [
+    { id: "koffert", name: "Kabinkoffert", note: "Maks 55 × 40 × 23 cm" }
+  ]}
+];
+/* Eksempeldata: hvor mange andre som har reservert. I ekte versjon kommer dette fra databasen. */
+var OTHERS = { sokker: 1, kapsler: 2, buff: 1 };
+var MONTHS = ["jan", "feb", "mar", "apr", "mai", "jun", "jul", "aug", "sep", "okt", "nov", "des"];
+class Component extends DCLogic {
+  componentWillUnmount() { clearTimeout(this._toastTimer); }
+  flashToast() {
+    var self = this;
+    clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(function () { self.setState({ toast: false }); }, 4000);
+  }
+  renderVals() {
+    var st = this.state || {};
+    var mine = st.mine || {};
+    var owner = (this.props.view ?? "Gjest") !== "Gjest";
+    var catIdx = typeof st.cat === "number" ? st.cat : -1;
+    if (catIdx < -2 || catIdx >= GROUPS.length) catIdx = -1;
+    var self = this;
+    var todayStr = new Date().toISOString().slice(0, 10);
+    function activeSale(it) {
+      if (!it.sale) return null;
+      if (it.sale.until && it.sale.until < todayStr) return null;
+      return it.sale;
+    }
+    function fmtDate(iso) {
+      var p = String(iso).split("-");
+      return parseInt(p[2], 10) + ". " + MONTHS[parseInt(p[1], 10) - 1];
+    }
+    function countFor(it) { return (OTHERS[it.id] || 0) + (mine[it.id] ? 1 : 0); }
+    function isTaken(it) { return !it.multi && countFor(it) > 0; }
+    function metaFor(g) {
+      var n = g.items.length;
+      var free = g.items.filter(function (it) { return !isTaken(it); }).length;
+      var sales = g.items.filter(function (it) { return activeSale(it) && (owner || !isTaken(it)); }).length;
+      var word = n === 1 ? "ønske" : "ønsker";
+      var s = owner ? n + " " + word : n + " " + word + " · " + free + " ledige";
+      if (sales > 0) s += " · " + sales + " på tilbud";
+      return s;
+    }
+    function mkItem(it) {
+      var count = countFor(it);
+      var isMine = !!mine[it.id];
+      var taken = isTaken(it);
+      var sale = activeSale(it);
+      var multiText = "Flere kan gi denne";
+      if (!owner && count > 0) multiText += " · " + count + " har allerede kjøpt";
+      return {
+        name: it.name, note: it.note,
+        star: !!it.star,
+        hand: it.hand || "", hasHand: !!it.hand,
+        isMulti: !!it.multi, multiText: multiText,
+        onSale: !!sale,
+        salePrice: sale ? sale.price : "",
+        saleWas: sale ? sale.was : "",
+        saleUntil: sale ? fmtDate(sale.until) : "",
+        links: it.links || [], hasShop: !!sale || !!(it.links && it.links.length),
+        strike: !owner && taken,
+        plain: owner || !taken,
+        canTake: !owner && !isMine && !taken,
+        isMine: !owner && isMine,
+        takenByOther: !owner && taken && !isMine,
+        takeLabel: it.multi ? (count > 0 ? "Jeg kjøper også" : "Jeg kjøper denne") : "Jeg tar denne",
+        mineLabel: it.multi ? "Du kjøper denne" : "Du tar denne",
+        toggle: function () {
+          var m = Object.assign({}, mine);
+          if (m[it.id]) {
+            delete m[it.id];
+            self.setState({ mine: m, toast: false });
+          } else {
+            m[it.id] = true;
+            self.setState({ mine: m, toast: true });
+            self.flashToast();
+          }
+        }
+      };
+    }
+    var cats = GROUPS.map(function (g, i) {
+      return {
+        name: g.name, meta: metaFor(g),
+        isRun: g.key === "run", isKitchen: g.key === "kitchen", isTech: g.key === "tech",
+        isMusic: g.key === "music", isTravel: g.key === "travel",
+        open: function () { self.setState({ cat: i }); }
+      };
+    });
+    var current = { name: "", meta: "", items: [] };
+    var nextName = "";
+    if (catIdx >= 0) {
+      var g = GROUPS[catIdx];
+      current = { name: g.name, meta: metaFor(g), items: g.items.map(mkItem) };
+      nextName = GROUPS[(catIdx + 1) % GROUPS.length].name;
+    }
+    var isAll = catIdx === -2;
+    var allGroups = isAll ? GROUPS.map(function (g) { return { name: g.name, items: g.items.map(mkItem) }; }) : [];
+    var total = 0, freeTotal = 0;
+    GROUPS.forEach(function (g) { g.items.forEach(function (it) { total++; if (!isTaken(it)) freeTotal++; }); });
+    var summary = owner
+      ? GROUPS.length + " kategorier · " + total + " ønsker"
+      : GROUPS.length + " kategorier · " + total + " ønsker · " + freeTotal + " ledige";
+    return {
+      cats: cats, current: current, nextName: nextName,
+      allGroups: allGroups, summary: summary,
+      isOverview: catIdx === -1, isCategory: catIdx >= 0, isAll: isAll,
+      isOwner: owner,
+      showToast: !owner && !!st.toast,
+      showAll: function () { self.setState({ cat: -2 }); },
+      back: function () { self.setState({ cat: -1 }); },
+      next: function () { self.setState({ cat: (catIdx + 1) % GROUPS.length }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
