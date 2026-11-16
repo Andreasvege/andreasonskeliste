@@ -17,6 +17,8 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: "Andreas ønsker seg",
+  description: "Ønskeliste til bursdag 2. desember og jul. Se lista og reserver en gave anonymt.",
+  openGraph: { title: "Andreas ønsker seg", locale: "nb_NO", type: "website" },
   robots: { index: false, follow: false },
 };
 
