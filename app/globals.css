@@ -338,7 +338,7 @@ button { font-family: inherit; cursor: pointer; }
 
 /* Ønske-rader på mobil: knappen på samme linje, til høyre for teksten */
 @media (max-width: 560px) {
-  .item { flex-wrap: nowrap; gap: 12px; }
+  .item { flex-wrap: nowrap; gap: 12px; align-items: flex-end; }
   .item-body { flex: 1 1 auto; }
   .item > .btn-take, .item > .btn-mine, .item > .taken, .item > .btn-placeholder {
     flex: none; max-width: 132px; min-height: 44px; padding: 8px 14px;
