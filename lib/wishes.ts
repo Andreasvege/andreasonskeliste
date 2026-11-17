@@ -11,13 +11,20 @@ export const seedWishList: WishList = WishListSchema.parse(raw);
 
 export const WISHLIST_TAG = "wishlist";
 
+async function readWishList(): Promise<WishList> {
+  const rows = (await db().query("select data from wishlist where id = 1")) as { data: unknown }[];
+  return rows.length ? WishListSchema.parse(rows[0].data) : seedWishList;
+}
+
+/** Fersk lesing uten cache, til redigering. */
+export const readWishListFresh = readWishList;
+
 /** Ønskelista fra databasen. Cachet til den endres (updateTag i redigerings-actions). */
 export async function getWishList(): Promise<WishList> {
   "use cache";
   cacheLife("max");
   cacheTag(WISHLIST_TAG);
-  const rows = (await db().query("select data from wishlist where id = 1")) as { data: unknown }[];
-  return rows.length ? WishListSchema.parse(rows[0].data) : seedWishList;
+  return readWishList();
 }
 
 /** Validerer og lagrer hele lista. Kaster ZodError hvis den er ugyldig. */

@@ -23,6 +23,7 @@ import {
   StarIcon,
   TagIcon,
 } from "./icons";
+import { EditWishButton, NewWishButton } from "./WishEditor";
 
 /** Felles props for alle visninger. Gjeste-interaksjon er valgfri. */
 export type ViewProps = {
@@ -71,6 +72,10 @@ function BackLink({ mode, style }: { mode: Mode; style?: React.CSSProperties }) 
       Alle kategorier
     </Link>
   );
+}
+
+function categoryOptions(list: WishList) {
+  return list.categories.map((c) => ({ slug: c.slug, name: c.name }));
 }
 
 /* ---------------- Forside ---------------- */
@@ -127,8 +132,9 @@ export function CategoryView(props: ViewProps & { category: Category }) {
       <h2 className="h-page">{category.name}</h2>
       <p className="page-meta">{categoryMeta(category, mode, counts, today)}</p>
       {category.items.map((it) => (
-        <WishRow key={it.id} wish={it} {...props} />
+        <WishRow key={it.id} wish={it} categorySlug={category.slug} {...props} />
       ))}
+      {mode === "owner" && <NewWishButton categorySlug={category.slug} categories={categoryOptions(list)} />}
       {next.slug !== category.slug && (
         <Link href={`${base}/k/${next.slug}`} className="pill-outline pill-next">
           Neste: {next.name}
@@ -156,8 +162,9 @@ export function AllView(props: ViewProps) {
             {cat.name}
           </h3>
           {cat.items.map((it) => (
-            <WishRow key={it.id} wish={it} {...props} />
+            <WishRow key={it.id} wish={it} categorySlug={cat.slug} {...props} />
           ))}
+          {mode === "owner" && <NewWishButton categorySlug={cat.slug} categories={categoryOptions(list)} />}
         </section>
       ))}
       <Sizes list={list} className="sizes-all" />
@@ -167,7 +174,17 @@ export function AllView(props: ViewProps) {
 
 /* ---------------- Ett ønske ---------------- */
 
-function WishRow({ wish, mode, counts, today, mine, pendingId, onToggle }: ViewProps & { wish: Wish }) {
+function WishRow({
+  wish,
+  categorySlug,
+  list,
+  mode,
+  counts,
+  today,
+  mine,
+  pendingId,
+  onToggle,
+}: ViewProps & { wish: Wish; categorySlug: string }) {
   const guest = mode === "guest";
   const count = countFor(wish, counts);
   const taken = isTaken(wish, counts);
@@ -226,6 +243,9 @@ function WishRow({ wish, mode, counts, today, mine, pendingId, onToggle }: ViewP
           </div>
         )}
       </div>
+      {mode === "owner" && (
+        <EditWishButton wish={wish} categorySlug={categorySlug} categories={categoryOptions(list)} />
+      )}
       {guest && (
         <WishAction
           wish={wish}

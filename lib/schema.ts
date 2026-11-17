@@ -10,7 +10,7 @@ const isoDate = z
 
 export const WishSchema = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/, "id kan bare inneholde a-z, 0-9 og -"),
-  name: z.string().min(1),
+  name: z.string().trim().min(1, "Ønsket må ha et navn"),
   note: z.string().optional(),
   hand: z.string().optional(),
   multi: z.boolean().optional(),
@@ -18,13 +18,17 @@ export const WishSchema = z.object({
   links: z
     .array(
       z.object({
-        label: z.string().min(1),
-        url: z.url({ protocol: /^https?$/ }),
+        label: z.string().trim().min(1, "Lenken må ha en tekst"),
+        url: z.url({ protocol: /^https?$/, error: "Ugyldig lenke (må starte med https://)" }),
       }),
     )
     .optional(),
   sale: z
-    .object({ price: z.string().min(1), was: z.string().min(1), until: isoDate })
+    .object({
+      price: z.string().min(1, "Tilbud mangler pris"),
+      was: z.string().min(1, "Tilbud mangler førpris"),
+      until: isoDate,
+    })
     .optional(),
 });
 
