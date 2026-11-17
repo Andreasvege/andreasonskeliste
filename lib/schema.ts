@@ -32,7 +32,10 @@ export const WishSchema = z.object({
     .optional(),
 });
 
-export const CATEGORY_ICONS = ["gift", "run", "kitchen", "tech", "music", "travel"] as const;
+export const CATEGORY_ICONS = [
+  "gift", "run", "kitchen", "tech", "music", "travel",
+  "clothes", "book", "home", "game", "outdoor", "plant",
+] as const;
 
 export const CategorySchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/),

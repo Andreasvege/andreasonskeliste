@@ -12,6 +12,12 @@ const ICON_NAMES: Record<Category["icon"], string> = {
   tech: "Tech",
   music: "Musikk",
   travel: "Reise",
+  clothes: "Klær",
+  book: "Bøker",
+  home: "Hjem",
+  game: "Spill",
+  outdoor: "Friluft",
+  plant: "Planter",
 };
 
 /** Det modalen trenger å vite om kategoriene (rekkefølge og navn). */

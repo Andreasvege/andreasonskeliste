@@ -21,6 +21,50 @@ export function CategoryIcon({ icon }: { icon: Category["icon"] }) {
           <path d="M12 9c-1.5-3-5-4-5.5-1.5S9.5 9 12 9zM12 9c1.5-3 5-4 5.5-1.5S14.5 9 12 9z" />
         </svg>
       );
+    case "clothes":
+      return (
+        <svg {...s}>
+          <path d="M8.5 3L3 6l2 4.5 3-1.2V21h8V9.3l3 1.2L21 6l-5.5-3c-.5 1.8-1.8 2.8-3.5 2.8S9 4.8 8.5 3z" />
+        </svg>
+      );
+    case "book":
+      return (
+        <svg {...s}>
+          <path d="M12 6.5C9.5 4.8 6.5 4.5 3 5.2v13.5c3.5-.7 6.5-.4 9 1.3" />
+          <path d="M12 6.5c2.5-1.7 5.5-2 9-1.3v13.5c-3.5-.7-6.5-.4-9 1.3z" />
+        </svg>
+      );
+    case "home":
+      return (
+        <svg {...s}>
+          <path d="M3 11l9-7 9 7" />
+          <path d="M5 9.5V20h14V9.5" />
+          <path d="M10 20v-5.5h4V20" />
+        </svg>
+      );
+    case "game":
+      return (
+        <svg {...s}>
+          <path d="M7 7h10a5 5 0 0 1 4.9 6l-.6 3a2.6 2.6 0 0 1-4.6 1.1L15 15H9l-1.7 2.1a2.6 2.6 0 0 1-4.6-1.1l-.6-3A5 5 0 0 1 7 7z" />
+          <path d="M8 10v3M6.5 11.5h3M15.5 11h.01M17.5 12.5h.01" />
+        </svg>
+      );
+    case "outdoor":
+      return (
+        <svg {...s}>
+          <path d="M2 20l7-11 4 6 2.5-3.5L22 20z" />
+          <circle cx="17" cy="5.5" r="2" />
+        </svg>
+      );
+    case "plant":
+      return (
+        <svg {...s}>
+          <path d="M6.5 14h11l-1.6 7H8.1z" />
+          <path d="M12 14V9" />
+          <path d="M12 10.5C8.8 10.5 7 8.6 7 5.5c3.1 0 5 1.9 5 5z" />
+          <path d="M12 9c0-3.1 1.9-5 5-5 0 3.1-1.9 5-5 5z" />
+        </svg>
+      );
     case "run":
       return (
         <svg {...s}>
