@@ -317,23 +317,18 @@ button { font-family: inherit; cursor: pointer; }
 .icon-choice input:checked + .caticon { border-color: var(--rod); background: #fff; }
 .icon-choice input:focus-visible + .caticon { outline: 3px solid var(--rod); outline-offset: 3px; }
 
-/* Kategorirader på mobil: tittel øverst, ikon nederst til venstre, pil til høyre */
+/* Kategorirader på mobil (variant B): lite ikon til venstre, tittel i midten, pil til høyre */
 .catarrow { display: flex; }
 @media (max-width: 560px) {
-  .catrow {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas: "text text text" "icon . arrow";
-    gap: 14px 0;
-    align-items: center;
-    min-height: 0;
-  }
-  .cattext { grid-area: text; }
-  .caticon { grid-area: icon; }
-  .catarrow { grid-area: arrow; }
-  /* /andreas: blyanten på samme linje som pila */
-  .catrow-owner { align-items: flex-end; gap: 4px; }
-  .catrow-owner .btn-icon { margin-bottom: 26px; }
+  .catrow { flex-wrap: nowrap; gap: 14px; min-height: 0; padding: 16px 0; }
+  .catrow .caticon { width: 44px; height: 44px; }
+  .catrow .caticon svg { width: 24px; height: 24px; }
+  .cattext { flex: 1 1 auto; }
+  .catname { font-size: 22px; }
+  .catmeta { font-size: 15px; }
+  .catarrow svg { width: 28px; height: 28px; }
+  /* /andreas: blyanten rett til høyre for pila */
+  .catrow-owner { gap: 2px; }
 }
 
 /* Ønske-rader på mobil: knappen på samme linje, til høyre for teksten */
