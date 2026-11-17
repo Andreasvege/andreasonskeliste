@@ -1,79 +1,32 @@
-import { z } from "zod";
+import "server-only";
+import { cacheLife, cacheTag } from "next/cache";
 import raw from "@/data/wishes.json";
+import { db } from "./db";
+import { WishListSchema, type WishList } from "./schema";
 
-const isoDate = z
-  .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, "Dato må være YYYY-MM-DD")
-  .refine((s) => {
-    const d = new Date(`${s}T00:00:00Z`);
-    return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === s;
-  }, "Ugyldig dato");
+export * from "./schema";
 
-const WishSchema = z.object({
-  id: z.string().regex(/^[a-z0-9-]+$/, "id kan bare inneholde a-z, 0-9 og -"),
-  name: z.string().min(1),
-  note: z.string().optional(),
-  hand: z.string().optional(),
-  multi: z.boolean().optional(),
-  star: z.boolean().optional(),
-  links: z
-    .array(
-      z.object({
-        label: z.string().min(1),
-        url: z.url({ protocol: /^https?$/ }),
-      }),
-    )
-    .optional(),
-  sale: z
-    .object({ price: z.string().min(1), was: z.string().min(1), until: isoDate })
-    .optional(),
-});
+/** Startverdi: brukes til å fylle databasen første gang, og valideres ved bygging. */
+export const seedWishList: WishList = WishListSchema.parse(raw);
 
-const CategorySchema = z.object({
-  slug: z.string().regex(/^[a-z0-9-]+$/),
-  name: z.string().min(1),
-  icon: z.enum(["run", "kitchen", "tech", "music", "travel"]),
-  items: z.array(WishSchema).min(1),
-});
+export const WISHLIST_TAG = "wishlist";
 
-const WishListSchema = z
-  .object({
-    occasion: z.string().min(1),
-    sizes: z.record(z.string(), z.string()),
-    categories: z.array(CategorySchema).min(1),
-  })
-  .superRefine((list, ctx) => {
-    const ids = new Set<string>();
-    const slugs = new Set<string>();
-    for (const cat of list.categories) {
-      if (slugs.has(cat.slug)) {
-        ctx.addIssue({ code: "custom", message: `Duplisert slug: ${cat.slug}` });
-      }
-      slugs.add(cat.slug);
-      for (const item of cat.items) {
-        if (ids.has(item.id)) {
-          ctx.addIssue({ code: "custom", message: `Duplisert id: ${item.id}` });
-        }
-        ids.add(item.id);
-      }
-    }
-  });
-
-export type Wish = z.infer<typeof WishSchema>;
-export type Category = z.infer<typeof CategorySchema>;
-export type WishList = z.infer<typeof WishListSchema>;
-
-// Valideres når modulen lastes, så bygget feiler hvis wishes.json er ugyldig.
-export const wishList: WishList = WishListSchema.parse(raw);
-
-const wishById = new Map<string, Wish>(
-  wishList.categories.flatMap((c) => c.items.map((it) => [it.id, it] as const)),
-);
-
-export function findWish(id: string): Wish | undefined {
-  return wishById.get(id);
+/** Ønskelista fra databasen. Cachet til den endres (updateTag i redigerings-actions). */
+export async function getWishList(): Promise<WishList> {
+  "use cache";
+  cacheLife("max");
+  cacheTag(WISHLIST_TAG);
+  const rows = (await db().query("select data from wishlist where id = 1")) as { data: unknown }[];
+  return rows.length ? WishListSchema.parse(rows[0].data) : seedWishList;
 }
 
-export function findCategory(slug: string): Category | undefined {
-  return wishList.categories.find((c) => c.slug === slug);
+/** Validerer og lagrer hele lista. Kaster ZodError hvis den er ugyldig. */
+export async function writeWishList(list: WishList): Promise<WishList> {
+  const valid = WishListSchema.parse(list);
+  await db().query(
+    `insert into wishlist (id, data, updated_at) values (1, $1, now())
+     on conflict (id) do update set data = excluded.data, updated_at = now()`,
+    [JSON.stringify(valid)],
+  );
+  return valid;
 }

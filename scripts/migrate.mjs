@@ -18,3 +18,11 @@ for (const stmt of statements) {
   await sql.query(stmt);
   console.log("✓", stmt.split("\n")[0]);
 }
+
+// Fyll lista fra data/wishes.json første gang (rører ikke en eksisterende liste).
+const seed = readFileSync(new URL("../data/wishes.json", import.meta.url), "utf8");
+const res = await sql.query(
+  "insert into wishlist (id, data) values (1, $1) on conflict (id) do nothing returning id",
+  [JSON.stringify(JSON.parse(seed))],
+);
+console.log(res.length ? "✓ fylte wishlist fra data/wishes.json" : "• wishlist finnes allerede, ikke endret");

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { reserve, unreserve } from "@/app/actions";
-import type { Wish, WishList } from "@/lib/wishes";
+import type { Wish, WishList } from "@/lib/schema";
 import { AllView, CategoryView, OverviewView, type ViewProps } from "./WishViews";
 import { CheckIcon } from "./icons";
 

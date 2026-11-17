@@ -1,4 +1,4 @@
-import type { Category, Wish, WishList } from "./wishes";
+import type { Category, Wish, WishList } from "./schema";
 
 export type Mode = "guest" | "owner";
 

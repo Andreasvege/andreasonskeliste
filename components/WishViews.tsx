@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Category, Wish, WishList } from "@/lib/wishes";
+import type { Category, Wish, WishList } from "@/lib/schema";
 import {
   activeSale,
   basePath,

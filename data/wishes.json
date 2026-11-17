@@ -1,23 +1,22 @@
 {
   "occasion": "Bursdag 2. desember & jul",
   "sizes": {
-    "overdel": "[fyll inn]",
-    "tights": "[fyll inn]",
-    "sko": "[fyll inn]"
+    "overdel": "M - L",
+    "tights": "M - L",
+    "sko": "44"
   },
   "categories": [
     {
       "slug": "loping",
-      "name": "Løping om vinteren",
+      "name": "Løping (om vinteren)",
       "icon": "run",
       "items": [
-        { "id": "tights", "name": "Vindtette løpetights", "note": "Craft ADV SubZ Tights", "hand": "til de kaldeste turene" },
-        { "id": "jakke", "name": "Lett vindjakke", "note": "Craft, Swix eller Norrøna senja" },
-        { "id": "ull", "name": "Tynt ullundertøy", "note": "Aclima LightWool, Devold eller Ulvang", "hand": "gjerne litt sporty" },
-        { "id": "sokker", "name": "Løpesokker i ull", "note": "Smartwool Run eller Darn Tough", "multi": true },
-        { "id": "buff", "name": "Buff Merino", "note": "Til halsen" },
-        { "id": "votter", "name": "Tynne løpevotter", "note": "Craft eller Swix" },
-        { "id": "lue", "name": "Tynn lue", "note": "Ull eller fleece" }
+        { "id": "tights", "name": "Løpetights", "note": "Noe som holder varmen", "hand": "til de kaldeste turene" },
+        { "id": "jakke", "name": "Lett vindjakke", "note": "Noe som holder varmen", "hand": "til de kaldeste turene" },
+        { "id": "ull", "name": "Tynt ullundertøy", "note": "Gjerne noe litt nøytralt, men sporty?", "hand": "alt annet enn rosa, bare" },
+        { "id": "sokker", "name": "Løpesokker i ull", "note": "", "multi": true },
+        { "id": "votter", "name": "Tynne løpehandsker", "note": "Har allerede et par i fleece, som ikke puster så godt" },
+        { "id": "lue", "name": "noe sporty", "note": "Ull eller fleece" }
       ]
     },
     {
@@ -26,9 +25,9 @@
       "icon": "kitchen",
       "items": [
         { "id": "kapsler", "name": "Vertuo Double Espresso Dolce", "note": "Må være Nespresso Vertuo-kapsler", "hand": "mild og dobbel, takk", "multi": true },
-        { "id": "pizza", "name": "Pizzastål", "note": "Ca. 6 mm tykt" },
-        { "id": "fjol", "name": "Skjærefjøl som tåler oppvaskmaskin", "note": "Epicurean" },
-        { "id": "panne", "name": "Stekepanne i rustfritt stål, 24 cm", "note": "F.eks. Scanpan Impact", "hand": "trenger ikke være fancy" }
+        { "id": "pizza", "name": "Pizzastål", "note": "Kan ikke så mye om dette" },
+        { "id": "fjol", "name": "Skjærefjøl som tåler oppvaskmaskin", "note": "F.eks Epicurean", "hand": "her er nok Hanne god!" },
+        { "id": "panne", "name": "Stekepanne i rustfritt stål, 24 cm", "note": "F.eks. Fiskars eller noe annet", "hand": "trenger ikke være fancy!" }
       ]
     },
     {

@@ -1,4 +1,4 @@
-import { wishList } from "@/lib/wishes";
+import { getWishList } from "@/lib/wishes";
 
 const BULB_COLORS: [string, string][] = [
   ["#FF5A5F", "255, 90, 95"],
@@ -28,7 +28,8 @@ function lowerFirst(s: string) {
   return s.charAt(0).toLocaleLowerCase("nb") + s.slice(1);
 }
 
-export function Hero() {
+export async function Hero() {
+  const wishList = await getWishList();
   return (
     <header className="hero">
       <div className="lights" aria-hidden="true">

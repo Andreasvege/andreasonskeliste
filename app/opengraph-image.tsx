@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { wishList } from "@/lib/wishes";
+import { getWishList } from "@/lib/wishes";
 
 // Etter design/Delingsbilde.dc.html (1200×630).
 export const alt = "Andreas ønsker seg – bursdag 2. desember og jul";
@@ -55,7 +55,8 @@ function Knit() {
   );
 }
 
-export default function Image() {
+export default async function Image() {
+  const wishList = await getWishList();
   const occasion = wishList.occasion.charAt(0).toLocaleLowerCase("nb") + wishList.occasion.slice(1);
   return new ImageResponse(
     (

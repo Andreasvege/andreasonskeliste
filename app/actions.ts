@@ -1,7 +1,7 @@
 "use server";
 
 import { refresh } from "next/cache";
-import { findWish } from "@/lib/wishes";
+import { findWishIn, getWishList } from "@/lib/wishes";
 import { deleteReservation, hashCode, insertReservation, newCode } from "@/lib/reservations";
 
 export type ReserveResult =
@@ -13,7 +13,7 @@ export type UnreserveResult = { ok: boolean };
 // Ingen logging av hvem som reserverer: vi tar bare imot ønske-id (og angre-kode).
 
 export async function reserve(itemId: unknown): Promise<ReserveResult> {
-  const wish = typeof itemId === "string" ? findWish(itemId) : undefined;
+  const wish = typeof itemId === "string" ? findWishIn(await getWishList(), itemId) : undefined;
   if (!wish) return { ok: false, reason: "unknown" };
 
   const code = newCode();
@@ -28,7 +28,7 @@ export async function reserve(itemId: unknown): Promise<ReserveResult> {
 }
 
 export async function unreserve(itemId: unknown, code: unknown): Promise<UnreserveResult> {
-  if (typeof itemId !== "string" || typeof code !== "string" || code.length > 100 || !findWish(itemId)) {
+  if (typeof itemId !== "string" || typeof code !== "string" || code.length > 100) {
     return { ok: false };
   }
   try {
