@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 import { getCounts } from "@/lib/reservations";
 import { getToday } from "@/lib/today";
-import { getWishList } from "@/lib/wishes";
+import { getWishList, visibleList } from "@/lib/wishes";
 import type { WishList } from "@/lib/schema";
 import { GuestView, type GuestPage as Page } from "./GuestView";
 import { AllView, CategoryView, OverviewView, type ViewProps } from "./WishViews";
@@ -12,7 +12,8 @@ import { AllView, CategoryView, OverviewView, type ViewProps } from "./WishViews
  * for knappene), mens antall reservasjoner hentes ferskt per forespørsel.
  */
 export async function GuestPage({ page }: { page: Page }) {
-  const [today, list] = await Promise.all([getToday(), getWishList()]);
+  const [today, full] = await Promise.all([getToday(), getWishList()]);
+  const list = visibleList(full);
   return (
     <Suspense fallback={<Fallback page={page} list={list} today={today} />}>
       <WithCounts page={page} list={list} today={today} />

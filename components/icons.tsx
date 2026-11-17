@@ -13,6 +13,14 @@ const stroke = (color: string, width: number) => ({
 export function CategoryIcon({ icon }: { icon: Category["icon"] }) {
   const s = { width: 28, height: 28, viewBox: "0 0 24 24", ...stroke("#13294B", 1.8) };
   switch (icon) {
+    case "gift":
+      return (
+        <svg {...s}>
+          <rect x="3" y="9" width="18" height="12" rx="1.5" />
+          <path d="M3 13h18M12 9v12" />
+          <path d="M12 9c-1.5-3-5-4-5.5-1.5S9.5 9 12 9zM12 9c1.5-3 5-4 5.5-1.5S14.5 9 12 9z" />
+        </svg>
+      );
     case "run":
       return (
         <svg {...s}>

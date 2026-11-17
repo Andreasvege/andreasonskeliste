@@ -24,6 +24,7 @@ import {
   TagIcon,
 } from "./icons";
 import { EditWishButton, NewWishButton } from "./WishEditor";
+import { CategoryDialog } from "./CategoryEditor";
 
 /** Felles props for alle visninger. Gjeste-interaksjon er valgfri. */
 export type ViewProps = {
@@ -83,6 +84,7 @@ function categoryOptions(list: WishList) {
 export function OverviewView(props: ViewProps) {
   const { list, mode, counts, today } = props;
   const base = basePath(mode);
+  const summaries = list.categories.map((c) => ({ slug: c.slug, name: c.name, icon: c.icon, count: c.items.length }));
   return (
     <>
       <OwnerBanner mode={mode} />
@@ -94,19 +96,29 @@ export function OverviewView(props: ViewProps) {
         </Link>
       </div>
       <nav aria-label="Kategorier">
-        {list.categories.map((cat) => (
-          <Link key={cat.slug} href={`${base}/k/${cat.slug}`} className="catrow">
-            <span className="caticon" aria-hidden="true">
-              <CategoryIcon icon={cat.icon} />
-            </span>
-            <span className="cattext">
-              <span className="catname">{cat.name}</span>
-              <span className="catmeta">{categoryMeta(cat, mode, counts, today)}</span>
-            </span>
-            <ArrowRight size={32} color="#A3211A" />
-          </Link>
-        ))}
+        {list.categories.map((cat) => {
+          const row = (
+            <Link key={cat.slug} href={`${base}/k/${cat.slug}`} className="catrow">
+              <span className="caticon" aria-hidden="true">
+                <CategoryIcon icon={cat.icon} />
+              </span>
+              <span className="cattext">
+                <span className="catname">{cat.name}</span>
+                <span className="catmeta">{categoryMeta(cat, mode, counts, today)}</span>
+              </span>
+              <ArrowRight size={32} color="#A3211A" />
+            </Link>
+          );
+          if (mode !== "owner") return row;
+          return (
+            <div key={cat.slug} className="catrow-owner">
+              {row}
+              <CategoryDialog category={summaries.find((c) => c.slug === cat.slug)} all={summaries} />
+            </div>
+          );
+        })}
       </nav>
+      {mode === "owner" && <CategoryDialog all={summaries} />}
       <Sizes list={list} />
     </>
   );

@@ -6,7 +6,7 @@
 import { randomBytes } from "node:crypto";
 import { updateTag } from "next/cache";
 import { z } from "zod";
-import type { Wish } from "@/lib/schema";
+import type { Category, Wish } from "@/lib/schema";
 import { readWishListFresh, WISHLIST_TAG, writeWishList } from "@/lib/wishes";
 
 export type EditResult = { ok: true } | { ok: false; error: string };
@@ -47,22 +47,26 @@ function clean(input: WishInput, id: string): Wish {
   return wish;
 }
 
+/** "Løping (om vinteren)" → "loping-om-vinteren" */
+function slugify(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/æ/g, "ae")
+    .replace(/ø/g, "o")
+    .replace(/å/g, "a")
+    .normalize("NFKD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 40);
+}
+
 /**
  * "Tynn lue (ull)" → "tynn-lue-ull-k3f9". Det tilfeldige tillegget gjør at en
  * id aldri gjenbrukes: et slettet ønske kan ha reservasjoner liggende igjen,
  * og et nytt ønske med samme navn skal ikke arve dem.
  */
 function newId(name: string, taken: Set<string>) {
-  const base =
-    name
-      .toLowerCase()
-      .replace(/æ/g, "ae")
-      .replace(/ø/g, "o")
-      .replace(/å/g, "a")
-      .normalize("NFKD")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .slice(0, 40) || "onske";
+  const base = slugify(name) || "onske";
   let id: string;
   do {
     id = `${base}-${randomBytes(3).toString("hex").slice(0, 4)}`;
@@ -114,10 +118,60 @@ export async function deleteWish(id: string): Promise<EditResult> {
     const list = await readWishListFresh();
     const cat = list.categories.find((c) => c.items.some((it) => it.id === id));
     if (!cat) return { ok: true };
-    if (cat.items.length === 1) {
-      return { ok: false, error: "En kategori må ha minst ett ønske" };
-    }
     cat.items = cat.items.filter((it) => it.id !== id);
+    await writeWishList(list);
+    updateTag(WISHLIST_TAG);
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: errorMessage(err) };
+  }
+}
+
+/* ---------------- Kategorier ---------------- */
+
+export type CategoryInput = { name: string; icon: Category["icon"]; position: number };
+
+/**
+ * Lagrer en ny eller endret kategori. Adressen (slug) settes én gang og
+ * endres ikke ved nytt navn, så delte lenker fortsetter å virke.
+ */
+export async function saveCategory(args: { slug?: string; category: CategoryInput }): Promise<EditResult> {
+  try {
+    const list = await readWishListFresh();
+    const name = typeof args.category?.name === "string" ? args.category.name.trim().slice(0, 80) : "";
+    const icon = args.category?.icon;
+
+    let cat: Category;
+    if (args.slug) {
+      const idx = list.categories.findIndex((c) => c.slug === args.slug);
+      if (idx < 0) return { ok: false, error: "Kategorien finnes ikke lenger" };
+      [cat] = list.categories.splice(idx, 1);
+      cat.name = name;
+      cat.icon = icon;
+    } else {
+      const taken = new Set(list.categories.map((c) => c.slug));
+      const base = slugify(name) || "kategori";
+      let slug = base;
+      for (let n = 2; taken.has(slug); n++) slug = `${base}-${n}`;
+      cat = { slug, name, icon, items: [] };
+    }
+
+    const pos = Number.isInteger(args.category?.position) ? args.category.position : list.categories.length;
+    list.categories.splice(Math.max(0, Math.min(pos, list.categories.length)), 0, cat);
+    await writeWishList(list);
+    updateTag(WISHLIST_TAG);
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: errorMessage(err) };
+  }
+}
+
+/** Sletter kategorien med alle ønskene i den. Reservasjoner blir liggende urørt. */
+export async function deleteCategory(slug: string): Promise<EditResult> {
+  try {
+    const list = await readWishListFresh();
+    if (!list.categories.some((c) => c.slug === slug)) return { ok: true };
+    list.categories = list.categories.filter((c) => c.slug !== slug);
     await writeWishList(list);
     updateTag(WISHLIST_TAG);
     return { ok: true };

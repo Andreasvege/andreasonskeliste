@@ -304,3 +304,15 @@ button { font-family: inherit; cursor: pointer; }
   .sale-row { grid-template-columns: 1fr 1fr; }
   .sale-row .field:last-child { grid-column: 1 / -1; }
 }
+
+/* Kategorier i /andreas */
+.catrow-owner { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--linje); }
+.catrow-owner .catrow { flex: 1; min-width: 0; border-bottom: none; }
+.catrow-owner + .btn-new, nav + .btn-new { margin-top: 24px; }
+.field-move { padding-top: 16px; border-top: 1px solid var(--linje); }
+.icon-picker { display: flex; flex-wrap: wrap; gap: 10px; }
+.icon-choice { position: relative; cursor: pointer; }
+.icon-choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.icon-choice .caticon { border: 2px solid transparent; transition: border-color 0.15s; }
+.icon-choice input:checked + .caticon { border-color: var(--rod); background: #fff; }
+.icon-choice input:focus-visible + .caticon { outline: 3px solid var(--rod); outline-offset: 3px; }

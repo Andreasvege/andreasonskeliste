@@ -13,6 +13,6 @@ create unique index if not exists reservations_exclusive_once on reservations (i
 -- Hele ønskelista som ett JSON-dokument (samme format som data/wishes.json).
 create table if not exists wishlist (
   id          int primary key default 1 check (id = 1),
-  data        jsonb not null,
+  data        json not null,             -- json (ikke jsonb) bevarer rekkefølgen på nøklene
   updated_at  timestamptz not null default now()
 );

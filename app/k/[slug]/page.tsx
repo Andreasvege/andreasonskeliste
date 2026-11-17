@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { GuestPage } from "@/components/GuestPage";
-import { findCategoryIn, getWishList } from "@/lib/wishes";
+import { findCategoryIn, getWishList, visibleList } from "@/lib/wishes";
 
 export async function generateStaticParams() {
   return (await getWishList()).categories.map((c) => ({ slug: c.slug }));
@@ -18,6 +18,6 @@ export default function Page({ params }: PageProps<"/k/[slug]">) {
 
 async function Category({ params }: Pick<PageProps<"/k/[slug]">, "params">) {
   const { slug } = await params;
-  if (!findCategoryIn(await getWishList(), slug)) notFound();
+  if (!findCategoryIn(visibleList(await getWishList()), slug)) notFound();
   return <GuestPage page={{ kind: "category", slug }} />;
 }

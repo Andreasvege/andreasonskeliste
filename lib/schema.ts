@@ -32,18 +32,21 @@ export const WishSchema = z.object({
     .optional(),
 });
 
+export const CATEGORY_ICONS = ["gift", "run", "kitchen", "tech", "music", "travel"] as const;
+
 export const CategorySchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/),
-  name: z.string().min(1),
-  icon: z.enum(["run", "kitchen", "tech", "music", "travel"]),
-  items: z.array(WishSchema).min(1),
+  name: z.string().trim().min(1, "Kategorien må ha et navn"),
+  icon: z.enum(CATEGORY_ICONS),
+  // Kan være tom (nye kategorier). Tomme kategorier vises ikke for gjester.
+  items: z.array(WishSchema),
 });
 
 export const WishListSchema = z
   .object({
     occasion: z.string().min(1),
     sizes: z.record(z.string(), z.string()),
-    categories: z.array(CategorySchema).min(1),
+    categories: z.array(CategorySchema).min(1, "Lista må ha minst én kategori"),
   })
   .superRefine((list, ctx) => {
     const ids = new Set<string>();
@@ -72,6 +75,11 @@ export function findWishIn(list: WishList, id: string): Wish | undefined {
     if (hit) return hit;
   }
   return undefined;
+}
+
+/** Gjester ser bare kategorier som har ønsker. */
+export function visibleList(list: WishList): WishList {
+  return { ...list, categories: list.categories.filter((c) => c.items.length > 0) };
 }
 
 export function findCategoryIn(list: WishList, slug: string): Category | undefined {

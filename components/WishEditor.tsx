@@ -124,16 +124,6 @@ function WishDialog({
             <label htmlFor={f("hand")}>Håndskrevet notat</label>
             <input id={f("hand")} className="hand-input" value={form.hand} onChange={(e) => set("hand", e.target.value)} placeholder="valgfritt" autoComplete="off" />
           </div>
-          <div className="field">
-            <label htmlFor={f("cat")}>Kategori</label>
-            <select id={f("cat")} value={cat} onChange={(e) => setCat(e.target.value)}>
-              {categories.map((c) => (
-                <option key={c.slug} value={c.slug}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
 
           <div className="checks">
             <label>
@@ -183,6 +173,17 @@ function WishDialog({
               </div>
             </div>
           </fieldset>
+
+          <div className="field field-move">
+            <label htmlFor={f("cat")}>{wish ? "Flytt til kategori" : "Kategori"}</label>
+            <select id={f("cat")} value={cat} onChange={(e) => setCat(e.target.value)}>
+              {categories.map((c) => (
+                <option key={c.slug} value={c.slug}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {error && (
             <p className="form-error" role="alert">

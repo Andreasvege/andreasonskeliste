@@ -26,3 +26,12 @@ const res = await sql.query(
   [JSON.stringify(JSON.parse(seed))],
 );
 console.log(res.length ? "✓ fylte wishlist fra data/wishes.json" : "• wishlist finnes allerede, ikke endret");
+
+// json bevarer rekkefølgen på nøkler (f.eks. størrelser); jsonb sorterer dem.
+const [{ data_type }] = await sql.query(
+  "select data_type from information_schema.columns where table_name = 'wishlist' and column_name = 'data'",
+);
+if (data_type === "jsonb") {
+  await sql.query("alter table wishlist alter column data type json using data::json");
+  console.log("✓ wishlist.data: jsonb → json");
+}
