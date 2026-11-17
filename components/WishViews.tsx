@@ -106,7 +106,9 @@ export function OverviewView(props: ViewProps) {
                 <span className="catname">{cat.name}</span>
                 <span className="catmeta">{categoryMeta(cat, mode, counts, today)}</span>
               </span>
-              <ArrowRight size={32} color="#A3211A" />
+              <span className="catarrow" aria-hidden="true">
+                <ArrowRight size={32} color="#A3211A" />
+              </span>
             </Link>
           );
           if (mode !== "owner") return row;
@@ -297,7 +299,11 @@ function WishAction({
     return (
       <button type="button" className="btn-mine" onClick={() => onToggle(wish)} disabled={pending} aria-busy={pending}>
         <CheckIcon />
-        {wish.multi ? "Du kjøper denne" : "Du tar denne"} · angre
+        <span>
+          {wish.multi ? "Du kjøper denne" : "Du tar denne"}
+          <span className="mine-sep"> · </span>
+          <span className="mine-undo">angre</span>
+        </span>
       </button>
     );
   }

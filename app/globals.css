@@ -316,3 +316,37 @@ button { font-family: inherit; cursor: pointer; }
 .icon-choice .caticon { border: 2px solid transparent; transition: border-color 0.15s; }
 .icon-choice input:checked + .caticon { border-color: var(--rod); background: #fff; }
 .icon-choice input:focus-visible + .caticon { outline: 3px solid var(--rod); outline-offset: 3px; }
+
+/* Kategorirader på mobil: tittel øverst, ikon nederst til venstre, pil til høyre */
+.catarrow { display: flex; }
+@media (max-width: 560px) {
+  .catrow {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "text text text" "icon . arrow";
+    gap: 14px 0;
+    align-items: center;
+    min-height: 0;
+  }
+  .cattext { grid-area: text; }
+  .caticon { grid-area: icon; }
+  .catarrow { grid-area: arrow; }
+  /* /andreas: blyanten på samme linje som pila */
+  .catrow-owner { align-items: flex-end; gap: 4px; }
+  .catrow-owner .btn-icon { margin-bottom: 26px; }
+}
+
+/* Ønske-rader på mobil: knappen på samme linje, til høyre for teksten */
+@media (max-width: 560px) {
+  .item { flex-wrap: nowrap; gap: 12px; }
+  .item-body { flex: 1 1 auto; }
+  .item > .btn-take, .item > .btn-mine, .item > .taken, .item > .btn-placeholder {
+    flex: none; max-width: 132px; min-height: 44px; padding: 8px 14px;
+    font-size: 15px; line-height: 1.2; text-align: center; border-radius: 22px;
+  }
+  .item > .btn-mine { gap: 8px; max-width: 164px; padding: 6px 16px 6px 14px; text-align: left; }
+  .mine-sep { display: none; }
+  .mine-undo { display: block; font-size: 13px; text-decoration: underline; text-underline-offset: 2px; }
+  .item > .btn-placeholder { width: 112px; padding: 0; }
+  .item-name { font-size: 21px; }
+}
