@@ -42,3 +42,13 @@ export async function deleteReservation(itemId: string, tokenHash: string) {
   )) as unknown[];
   return rows.length;
 }
+
+/** Hvor mange av de gitte ønskene som er tatt (bare vanlige ønsker, ikke multi). */
+export async function countTaken(itemIds: string[]): Promise<number> {
+  if (itemIds.length === 0) return 0;
+  const rows = (await db().query(
+    "select count(distinct item_id)::int as n from reservations where exclusive and item_id = any($1)",
+    [itemIds],
+  )) as { n: number }[];
+  return rows[0]?.n ?? 0;
+}

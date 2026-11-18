@@ -25,6 +25,7 @@ import {
 } from "./icons";
 import { EditWishButton, NewWishButton } from "./WishEditor";
 import { CategoryDialog } from "./CategoryEditor";
+import { TakenSummary } from "./TakenSummary";
 
 /** Felles props for alle visninger. Gjeste-interaksjon er valgfri. */
 export type ViewProps = {
@@ -51,12 +52,13 @@ function Knit() {
   );
 }
 
-function OwnerBanner({ mode }: { mode: Mode }) {
+function OwnerBanner({ mode, withSummary }: { mode: Mode; withSummary?: boolean }) {
   if (mode !== "owner") return null;
   return (
-    <p className="owner-banner">
-      Spoilerfri visning (/andreas). Du ser hele lista, men ikke hva som er tatt.
-    </p>
+    <div className="owner-banner">
+      <p>Spoilerfri visning (/andreas). Du ser hele lista, men ikke hva som er tatt.</p>
+      {withSummary && <TakenSummary />}
+    </div>
   );
 }
 
@@ -87,7 +89,7 @@ export function OverviewView(props: ViewProps) {
   const summaries = list.categories.map((c) => ({ slug: c.slug, name: c.name, icon: c.icon, count: c.items.length }));
   return (
     <>
-      <OwnerBanner mode={mode} />
+      <OwnerBanner mode={mode} withSummary />
       <div className="overview-top">
         <p className="summary">{listSummary(list, mode, counts)}</p>
         <Link href={`${base}/alle`} className="pill-outline">

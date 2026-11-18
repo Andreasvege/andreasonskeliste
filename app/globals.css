@@ -93,6 +93,10 @@ button { font-family: inherit; cursor: pointer; }
   margin: 0 0 24px; padding: 14px 0; border-bottom: 2px solid var(--natt);
   font-size: 17px; font-weight: 600;
 }
+.owner-banner p { margin: 0; }
+.taken-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 0 12px; margin-top: 4px; }
+.taken-summary p { color: var(--gronn); }
+.taken-summary .btn-text { font-size: 15px; color: var(--dempet); }
 .overview-top {
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
   gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--linje);
