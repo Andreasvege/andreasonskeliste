@@ -18,6 +18,7 @@ const ICON_NAMES: Record<Category["icon"], string> = {
   game: "Spill",
   outdoor: "Friluft",
   plant: "Planter",
+  vinyl: "Vinyl",
 };
 
 /** Det modalen trenger å vite om kategoriene (rekkefølge og navn). */

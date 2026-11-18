@@ -65,6 +65,15 @@ export function CategoryIcon({ icon }: { icon: Category["icon"] }) {
           <path d="M12 9c0-3.1 1.9-5 5-5 0 3.1-1.9 5-5 5z" />
         </svg>
       );
+    case "vinyl":
+      return (
+        <svg {...s}>
+          <circle cx="12" cy="12" r="9" />
+          <circle cx="12" cy="12" r="2.6" />
+          <path d="M12 5.8a6.2 6.2 0 0 1 6.2 6.2M5.8 12a6.2 6.2 0 0 0 6.2 6.2" />
+          <path d="M12 12h.01" />
+        </svg>
+      );
     case "run":
       return (
         <svg {...s}>

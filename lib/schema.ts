@@ -34,7 +34,7 @@ export const WishSchema = z.object({
 
 export const CATEGORY_ICONS = [
   "gift", "run", "kitchen", "tech", "music", "travel",
-  "clothes", "book", "home", "game", "outdoor", "plant",
+  "clothes", "book", "home", "game", "outdoor", "plant", "vinyl",
 ] as const;
 
 export const CategorySchema = z.object({
