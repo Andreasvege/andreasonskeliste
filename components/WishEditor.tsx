@@ -2,6 +2,7 @@
 
 import { useId, useRef, useState, useTransition } from "react";
 import { deleteWish, saveWish, type WishInput } from "@/app/edit-actions";
+import { checkWishTaken } from "@/app/owner-actions";
 import type { Wish } from "@/lib/schema";
 
 type CategoryOption = { slug: string; name: string };
@@ -52,6 +53,8 @@ function WishDialog({
   const [error, setError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [pending, startTransition] = useTransition();
+  const [takenText, setTakenText] = useState<string | null>(null);
+  const [checking, startCheck] = useTransition();
 
   // Les inn ferske verdier hver gang modalen åpnes.
   const open = () => {
@@ -59,6 +62,7 @@ function WishDialog({
     setCat(categorySlug);
     setError(null);
     setConfirmDelete(false);
+    setTakenText(null);
     ref.current?.showModal();
   };
   const close = () => ref.current?.close();
@@ -81,6 +85,15 @@ function WishDialog({
     e.preventDefault();
     run(() => saveWish({ id: wish?.id, categorySlug: cat, wish: form }));
   };
+
+  // Henter status for akkurat dette ønsket, bare når Andreas trykker på knappen.
+  const checkTaken = (id: string) =>
+    startCheck(async () => {
+      const res = await checkWishTaken(id);
+      if (!res.ok) return setTakenText("Fikk ikke sjekket. Prøv igjen.");
+      if (res.multi) setTakenText(res.count === 0 ? "Ingen har sagt at de kjøper denne ennå." : `${res.count} har sagt at de kjøper denne.`);
+      else setTakenText(res.count > 0 ? "Ja, dette ønsket er reservert." : "Nei, dette ønsket er ikke reservert.");
+    });
 
   const f = (name: string) => `${uid}-${name}`;
 
@@ -184,6 +197,23 @@ function WishDialog({
               ))}
             </select>
           </div>
+
+          {wish && (
+            <div className="taken-check">
+              {takenText ? (
+                <>
+                  <p role="status">{takenText}</p>
+                  <button type="button" className="btn-text" onClick={() => setTakenText(null)}>
+                    Skjul
+                  </button>
+                </>
+              ) : (
+                <button type="button" className="btn-text" onClick={() => checkTaken(wish.id)} disabled={checking} aria-busy={checking}>
+                  {checking ? "Sjekker…" : "Sjekk om dette ønsket er reservert"}
+                </button>
+              )}
+            </div>
+          )}
 
           {error && (
             <p className="form-error" role="alert">

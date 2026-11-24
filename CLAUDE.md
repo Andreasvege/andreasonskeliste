@@ -63,10 +63,10 @@ npm run db:migrate  # idempotent: oppretter tabeller, seeder wishlist fra data/w
 - Ikke lagre navn, IP, user agent, kommentarer eller analytics om gjester.
 - Angre-koden (`randomBytes(32)` base64url) lagres bare i gjestens `localStorage` (`onskeliste:codes`). Databasen har bare sha256 av den.
 - Eiersidene (`components/OwnerPage.tsx`, `app/andreas/**`) skal **aldri** importere `lib/reservations.ts` eller hente reservasjoner.
-- Eneste unntak er `app/owner-actions.ts` → `getTakenSummary()`. Andreas ba om den:
-  - Den henter bare én totalsum («x av y ønsker er tatt»), aldri per ønske eller per kategori.
-  - Den kjøres bare når han trykker på knappen i `components/TakenSummary.tsx`, på `/andreas`.
-  - Multi-ønsker regnes som ledige.
+- Eneste unntak er `app/owner-actions.ts`. Andreas ba om begge, og de kjøres bare når han selv trykker på en knapp:
+  - `getTakenSummary()` henter én totalsum («x av y ønsker er tatt»), aldri per kategori. Knappen ligger i `components/TakenSummary.tsx` på `/andreas`. Multi-ønsker regnes som ledige.
+  - `checkWishTaken(id)` henter status for ett ønske. Knappen «Sjekk om dette ønsket er reservert» ligger i redigeringsmodalen (`WishEditor.tsx`). For multi-ønsker vises antall.
+  - Ingen eierside skal vise status for flere ønsker samtidig eller hente den uten at han ber om det.
 - Redigering har bevisst **ingen innlogging**. Det var Andreas sitt valg, siden siden bare er for familien.
 
 ## Kodestruktur
@@ -74,7 +74,7 @@ npm run db:migrate  # idempotent: oppretter tabeller, seeder wishlist fra data/w
 - `lib/wishes.ts` (server-only):
   - `getWishList()` er cachet med `"use cache"`, `cacheLife("max")` og `cacheTag("wishlist")`.
   - `readWishListFresh()` og `writeWishList()` brukes når lista redigeres.
-- `lib/reservations.ts`: `getCounts`, `insertReservation`, `deleteReservation`, `countTaken`, `hashCode`, `newCode`.
+- `lib/reservations.ts`: `getCounts`, `insertReservation`, `deleteReservation`, `countTaken`, `countForItem`, `hashCode`, `newCode`.
 - `lib/view.ts`: presentasjonshjelpere (Oslo-dato, tilbud, `countFor`/`isTaken`, sammendrag, `basePath`).
 - `lib/schema.ts` (trygg for klienten):
   - zod-skjemaer og `CATEGORY_ICONS`.

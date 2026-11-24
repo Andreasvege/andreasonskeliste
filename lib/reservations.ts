@@ -52,3 +52,12 @@ export async function countTaken(itemIds: string[]): Promise<number> {
   )) as { n: number }[];
   return rows[0]?.n ?? 0;
 }
+
+/** Antall reservasjoner på ett ønske. Brukes bare av sjekk-knappen i ønske-editoren på /andreas. */
+export async function countForItem(itemId: string): Promise<number> {
+  const rows = (await db().query(
+    "select count(*)::int as n from reservations where item_id = $1",
+    [itemId],
+  )) as { n: number }[];
+  return rows[0]?.n ?? 0;
+}
