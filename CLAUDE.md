@@ -17,6 +17,15 @@
   - Testrader må ha en tydelig prefiks, for eksempel `test-…`, og slettes etterpå.
   - Ta backup av `wishlist.data` før du tester redigering.
   - Ikke skriv ut hemmeligheter.
+- **Slik tester du reservasjonsstatus uten å se ekte data:**
+  1. Ta backup av `wishlist.data`.
+  2. Lag et testønske (`test-…`) via editoren på `/andreas/k/…`.
+  3. Sett inn en reservasjon på det med `token_hash = 'test-hash'`.
+  4. Sjekk resultatet i nettleseren.
+  5. Slett reservasjonen og testønsket, og sammenlign `wishlist.data` med backupen.
+  - Engangsskript kjøres med `node --env-file=.env.local` fra prosjektmappa, fordi `@neondatabase/serverless` må kunne løses opp derfra. Slett skriptet etterpå.
+- Port 3000 er ofte opptatt av en annen app. Start dev-serveren med `npx next dev -p 3005`.
+- Playwright kan bare lagre skjermbilder inne i prosjektet. `.playwright-mcp/` er gitignorert.
 
 ## Kommandoer
 
